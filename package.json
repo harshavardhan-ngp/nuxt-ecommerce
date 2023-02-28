@@ -13,9 +13,11 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@mdi/font": "^7.1.96",
     "@nuxtjs/router": "^1.7.0",
     "cross-env": "^5.2.0",
     "nuxt": "^2.0.0",
+    "nuxt-material-design-icons-iconfont": "^1.0.2",
     "vuetify": "^2.6.3"
   },
   "devDependencies": {

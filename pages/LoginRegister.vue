@@ -1,12 +1,12 @@
 <template>
   <div>
     <div 
-      v-if="!registerActive" 
+     
       :class="'loginForm'">
       <v-sheet 
         width="300" 
         class="form">
-        <v-form >
+        <v-form v-if="!registerActive">
           <h2 style="margin-bottom: 30px;">Sign In</h2>
           <v-text-field 
             v-model="login.email" 
@@ -30,18 +30,10 @@
           </p>
         <!-- </NuxtLink> -->
         </v-form>
-      </v-sheet>
-    </div>
 
-    <!-- REGISTRATION -->
-    <div 
-      :class="'loginForm'"
-      else 
-    >
-      <v-sheet 
-        width="300" 
-        class="form">
-        <v-form >
+        <!-- REGISTRATION -->
+    
+        <v-form v-else>
           <h2 style="margin-bottom: 30px;">Sign Up</h2>
           <v-text-field 
             v-model="reg.email" 

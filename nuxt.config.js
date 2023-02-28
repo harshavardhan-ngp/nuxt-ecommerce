@@ -4,6 +4,7 @@ const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
   mode: 'spa',
+  components:true,
 
   /*
   ** Headers of the page
@@ -29,9 +30,10 @@ module.exports = {
   /*
   ** Global CSS
   */
-  // css: [
-  //   'vuetify/src/stylus/main.styl'
-  // ],
+  css: [
+    '@mdi/font/css/materialdesignicons.min.css'
+    // 'vuetify/src/stylus/main.styl'
+  ],
 
   /*
   ** Plugins to load before mounting the App
@@ -45,7 +47,9 @@ module.exports = {
   ** Nuxt.js modules
   */
  modules: [
-    '@nuxtjs/router'
+    '@nuxtjs/router',
+    'nuxt-material-design-icons-iconfont',
+
   ],
 
   /*

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './pages/LoginRegister'
-import Home from './pages/AddProducts'
+import Home from './pages/ShopPage'
 
 
 Vue.use(Router)
@@ -18,7 +18,6 @@ export function createRouter() {
         path: '/',
         component: Home
       },
-
     ]
   })
 }
