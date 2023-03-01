@@ -1,9 +1,27 @@
 <template>
   <div>
     <div class="header">
-      <button>
-        Shop
-      </button>
+      <NuxtLink 
+        class="hmebtn" 
+        to="/">
+        <button>
+          Shop
+        </button>
+      </NuxtLink>
+      <NuxtLink 
+        class="hmebtn" 
+        to="/cart">
+        <button>
+          Cart
+        </button>
+      </NuxtLink>
+      <NuxtLink 
+        class="hmebtn" 
+        to="/wishlist">
+        <button>
+          Wishlist
+        </button>
+      </NuxtLink>
     </div>
     <div class="main">
       
@@ -13,15 +31,17 @@
   </div>
 </template>
 
-<style>
-.v-application--wrap{
-  min-height: 0 !important;
+<style scoped>
+.hmebtn{
+  padding: 0 15px;
 }
 .main{
   padding-top: 55px;
   padding-bottom: 55px;
 }
 .header{
+  display: flex;
+  justify-content: space-evenly;
   z-index: 1;
   position: fixed;
   height: 55px;
@@ -30,8 +50,12 @@
   line-height: 55px;
   color: white;
   text-align: center;
-  background-color: #ACE1AF;
+  background-color: #00693E;
 
+}
+.header a{
+color: white;
+font-weight: bold;
 }
 .footer{
   position: fixed;

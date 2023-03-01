@@ -69,7 +69,9 @@
 
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 export default {
+  
   name: 'AddProducts',
   data: () => ({
     countries: ['Accessories', 'Fashion', 'Mobile Phones', 'Laptops'],
@@ -83,18 +85,21 @@ export default {
     }
   }),
   computed: {
+    ...mapGetters('addProd',['isModal']),
     showModal() {
-      return this.$store.getters.isModal
+      return this.isModal
+      // return this.$store.getters['addProd/isModal']
     }
   },
   methods: {
+    ...mapActions('addProd',['changeModal', 'appendList']),
     handleSubmit(e) {
       e.preventDefault()
       console.log(this.data);
-      this.$store.dispatch('appendList',this.data)
+      this.appendList(this.data)
       this.data={}
       this.image=[]
-      this.$store.dispatch('changeModal')
+      this.changeModal()
     },
     imgUpload(e) {
       // console.log(e);
@@ -111,7 +116,7 @@ export default {
       console.log("e:",this.data)
     },
     modal() {
-      this.$store.dispatch('changeModal')
+      this.changeModal()
     }
   },
 }

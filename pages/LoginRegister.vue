@@ -85,7 +85,6 @@
     methods: {
       onSubmit(e) {
         e.preventDefault()
-        console.log('local');
         localStorage.setItem('email', this.login.email)
         localStorage.setItem('password', this.login.password)
         this.$router.push('/')
