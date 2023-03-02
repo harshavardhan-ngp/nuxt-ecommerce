@@ -82,6 +82,7 @@ export default {
       ptype: null,
       price: null,
       quantity: null,
+      cardOne:'start'
     }
   }),
   computed: {

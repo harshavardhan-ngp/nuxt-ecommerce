@@ -1,60 +1,67 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-app>
-      <table class="table">
-        <thead class="thead">
-          <tr>
-            <th>
-              Name
-            </th>
-            <th>
-              Image
-            </th>
-            <th>
-              Type
-            </th>
-            <th>
-              Unit-Price
-            </th>
-            <th>
-              Quantity
-            </th>
-            <th>
-              Total
-            </th>
-          </tr>
-        </thead>
-        <tbody v-if="getList.length>0">
-          <tr
-            v-for="(items,ind) in getList"
-            :key="ind"
-          >
-            <td>{{ items.pname }}</td>
-            <td><v-img :src=" items.img" /></td>
-            <td>{{ items.ptype }}</td>
-            <td>{{ items.price }}</td>
-            <td>
-              <v-icon 
-                class="del" 
-                @click="decrease(items.id)" >mdi-minus-box-outline</v-icon>
-              {{ items.quantity }}
-              <v-icon 
-                class="add" 
-                @click="increase(items.id)">mdi-plus-box-outline</v-icon>
-            </td>
-            <td v-if="items.total>0">{{ items.total }}</td>
-            <td v-else>
-              <v-icon 
-                class="remove" 
-                @click="remove"
-              >mdi-delete-circle</v-icon>
-            </td>
-          </tr>
-        </tbody>
-        <tbody v-else>
-          No Items in Cart
-        </tbody>
-      </table>
+      <v-row>
+        <v-col lg="8">
+          <table class="table">
+            <thead class="thead">
+              <tr>
+                <th>
+                  Name
+                </th>
+                <th>
+                  Image
+                </th>
+                <th>
+                  Type
+                </th>
+                <th>
+                  Unit-Price
+                </th>
+                <th>
+                  Quantity
+                </th>
+                <th>
+                  Total
+                </th>
+              </tr>
+            </thead>
+            <tbody v-if="getList.length>0">
+              <tr
+                v-for="(items,ind) in getList"
+                :key="ind"
+              >
+                <td>{{ items.pname }}</td>
+                <td><v-img :src=" items.img" /></td>
+                <td>{{ items.ptype }}</td>
+                <td>{{ items.price }}</td>
+                <td>
+                  <v-icon 
+                    class="del" 
+                    @click="decrease(items.id)" >mdi-minus-box-outline</v-icon>
+                  {{ items.quantity }}
+                  <v-icon 
+                    class="add" 
+                    @click="increase(items.id)">mdi-plus-box-outline</v-icon>
+                </td>
+                <td v-if="items.total>0">{{ items.total }}</td>
+                <td v-else>
+                  <v-icon 
+                    class="remove" 
+                    @click="remove"
+                  >mdi-delete-circle</v-icon>
+                </td>
+              </tr>
+            </tbody>
+            <tbody v-else>
+              No Items in Cart
+            </tbody>
+          </table>
+        </v-col>
+        <v-col lg="4">
+          <CheckOut />
+        </v-col>
+      </v-row>
     </v-app>
   </v-container>
 </template>
@@ -118,16 +125,13 @@ cursor: pointer;
   width:100%;
   table-layout: fixed;
 }
-tbody{
-  /* background-color: rgba(255,255,255,0.5); */
 
-    /* background-color: #E5E4E2; */
-}
 th{
     text-align: center!important;
   padding: 20px 15px;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 17px;
+  font-family: 'Source Sans Pro', sans-serif;
   color: #000;
   text-transform: uppercase;
 }
@@ -135,8 +139,8 @@ td{
   padding: 15px;
   text-align: center;
   vertical-align:middle;
-  font-weight: 400;
   font-size: 15px;
+  font-family: 'Source Sans Pro', sans-serif;
   color: #000;
   border-bottom: solid 1px rgba(255, 255, 255, 0.849);
   /* border-right: solid 1px rgba(255, 255, 255, 0.849); */

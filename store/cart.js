@@ -1,10 +1,17 @@
 const state=()=>({
-    cartList:[]
+    cartList:[],
+    total:0
 });
 
 const getters={
     showCart(state){
         return state.cartList
+    },
+    total(state){
+        state.cartList.forEach(ele => {
+            state.total+=ele.total
+        });
+        return state.total
     }
 };
 
