@@ -10,27 +10,46 @@ const getters={
 
 const mutations={
     addCart(state, payload){
+        // PAYLOAD = ShopList data
         const data=state.cartList.find(ele=> ele.id==payload.id)
-        if (data){
+        if (data && payload.quantity){
             // console.log(data);
             data.quantity+=1
-            data.total=payload.quantity*payload.price
+            data.total=data.quantity*data.price
             // state.cartList.push(payload)
+            payload.quantity-=1
         }
-        else{
-            payload.quantity=1
-            payload.price=Number(payload.price)
-            payload['total']=payload.quantity*payload.price
-            state.cartList.push(payload)
+        else if(payload.quantity){
+            state.cartList=[...state.cartList,{
+                id:payload.id,
+                pname:payload.pname,
+                img:payload.img,
+                ptype:payload.ptype,
+                price:Number(payload.price),
+                quantity:1,
+                total:payload.price*1
+            }]
+            payload.quantity-=1
+        }
+    },
+    incQunatity(state, payload){
+        // PAYLOAD = ProdList single item
+        const data=state.cartList.find(ele=> ele.id==payload.id)
+        if (data && payload.quantity){
+            // console.log(data);
+            data.quantity+=1
+            data.total=data.quantity*data.price
+            payload.quantity-=1
         }
     },
     decQuantity(state, payload){
+        // PAYLOAD = ProdList single item
         const data=state.cartList.find(ele=> ele.id==payload.id)
         if (data && data.total>0){
             // console.log(data);
             data.quantity-=1
-            data.total=payload.quantity*payload.price
-            // state.cartList.push(payload)
+            data.total=data.quantity*data.price
+            payload.quantity+=1
         }
     },
     delFromCart(state){
@@ -46,7 +65,7 @@ const actions={
         commit('addCart', payload)
     },
     addQuan({commit},payload){
-        commit('addCart',payload)
+        commit('incQunatity',payload)
     },
     delQuan({commit},payload){
         commit('decQuantity',payload)

@@ -36,11 +36,11 @@
             <td>
               <v-icon 
                 class="del" 
-                @click="decrease(items)" >mdi-minus-box-outline</v-icon>
+                @click="decrease(items.id)" >mdi-minus-box-outline</v-icon>
               {{ items.quantity }}
               <v-icon 
                 class="add" 
-                @click="increase(items)">mdi-plus-box-outline</v-icon>
+                @click="increase(items.id)">mdi-plus-box-outline</v-icon>
             </td>
             <td v-if="items.total>0">{{ items.total }}</td>
             <td v-else>
@@ -64,21 +64,22 @@ import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default{
     computed:{
-        // ...mapState('addProd',['prodList']),
+        ...mapState('addProd',['prodList']),
         ...mapGetters('cart',['showCart']),
         getList(){
-            console.log(this.showCart);
+            // console.log(this.showCart);
             return this.showCart
-                    //    return this.$store.state.prodList
         }
     },
     methods:{
         ...mapActions('cart',['addQuan', 'delQuan', 'removeFromCart']),
-        increase(ele){
-            this.addQuan(ele)
+        increase(ind){
+          const data = this.prodList.find(ele=> ele.id==ind)
+          this.addQuan(data)
         },
-        decrease(ele){
-            this.delQuan(ele)
+        decrease(ind){
+          const data = this.prodList.find(ele=> ele.id==ind)
+            this.delQuan(data)
         },
         remove(){
             this.removeFromCart()
