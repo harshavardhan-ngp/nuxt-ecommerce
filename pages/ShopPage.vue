@@ -98,8 +98,8 @@ export default{
       flip(id){
         this.flipCard(id)
       },
-      delItem(){
-        this.delProd()
+      delItem(id){
+        this.delProd(id)
       }
     }
 }

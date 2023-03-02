@@ -48,6 +48,7 @@ const mutations={
         data.cardOne=data.cardOne=='start'?'flipped':'start'
     },
     delFromList(state, payload){
+        console.log('delPayload:',payload);
         state.prodList=state.prodList.filter(ele=>{ return ele.id != payload})
     }
 };

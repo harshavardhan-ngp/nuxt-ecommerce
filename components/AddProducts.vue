@@ -96,7 +96,7 @@ export default {
     ...mapActions('addProd',['changeModal', 'appendList']),
     handleSubmit(e) {
       e.preventDefault()
-      console.log(this.data);
+      // console.log(this.data);
       this.appendList(this.data)
       this.data={}
       this.image=[]
@@ -114,7 +114,7 @@ export default {
       }
       // this.data.image=rawImg
       reader.readAsDataURL(e)
-      console.log("e:",this.data)
+      // console.log("e:",this.data)
     },
     modal() {
       this.changeModal()
