@@ -1,9 +1,9 @@
 const state=()=>({
-    showModal: false,
-    id:2,
+    id:3,
+    editForm:[],
     prodList:[
         {
-            id:0,
+            id:1,
             img:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
         pname:'MI',
         ptype:'Mobile',
@@ -12,10 +12,10 @@ const state=()=>({
         cardOne:'start'
     },
     {
-        id:1,
+        id:2,
         img:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
     pname:'Dell',
-    ptype:'laptopm',
+    ptype:'Laptops',
     quantity:3,
     price:'72000',
     cardOne:'start'
@@ -24,11 +24,12 @@ const state=()=>({
 });
 
 const getters={
-    isModal(state){
-        return state.showModal
-    },
     showList(state){
+        console.log('state',state.prodList);
         return state.prodList
+    },
+    editProd(state){
+        return state.editForm
     }
 };
 
@@ -41,16 +42,14 @@ const mutations={
         state.prodList.push(payload)
         // console.log('prod:',state.prodList);
     },
-    cardFlip(state, payload){
-        console.log('flip:',payload);
-        const data = state.prodList.find(ele=>ele.id==payload)
-        console.log('flip-data:',data);
-        data.cardOne=data.cardOne=='start'?'flipped':'start'
-    },
     delFromList(state, payload){
         console.log('delPayload:',payload);
         state.prodList=state.prodList.filter(ele=>{ return ele.id != payload})
-    }
+    },
+    updtFromList(state, payload){
+        state.editForm.push(state.prodList.find(ele=>ele.id==payload))
+        console.log('updtPayload:',state.editForm, payload);
+    },
 };
 
 const actions={
@@ -61,13 +60,14 @@ const actions={
     appendList({commit}, payload){
         commit('addList', payload)
     },
-    flipCard({commit}, payload){
-        commit('cardFlip', payload)
-    },
     delProd({commit}, payload){
         commit('delFromList', payload)
-    }
+    },
+    updtProd({commit}, payload){
+        commit('updtFromList', payload)
+    },
 };
+
 export default{
     state,
     mutations,

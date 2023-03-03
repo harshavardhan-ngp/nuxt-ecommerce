@@ -1,70 +1,69 @@
 <template>
-  <div data-app>
-    <v-btn 
-      class="addBtn" 
-      @click="modal">
-      Add +
-    </v-btn>
-    <v-container 
-      v-if="showModal" 
-      class="modal">
-      <!-- <v-app> -->
-      <v-layout justify-center>
+  <v-row 
+    justify="center" 
+    data-app>
+    <v-dialog
+      v-model="dialog"
+      persistent
+      max-width="600px"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          v-bind="attrs"
+          class="addBtn"
+          v-on="on"
+        >
+          Add +
+        </v-btn>
+      </template>
+      <v-card >
+        <v-card-text>
+          <v-text-field 
+            v-model="data.pname" 
+            label="Product Name" 
+            required />
 
-        <v-card class="mt-5">
-          <v-card-text>
-            <v-text-field 
-              v-model="data.pname" 
-              label="Product Name" 
-              required />
+          <v-autocomplete 
+            :items="countries" 
+            v-model="data.ptype" 
+            label="Product Type" 
+            required />
 
-            <v-autocomplete 
-              :items="countries" 
-              v-model="data.ptype" 
-              label="Product Type" 
-              required />
+          <v-text-field 
+            v-model="data.price" 
+            label="Price" 
+            required />
 
-            <v-text-field 
-              v-model="data.price" 
-              label="Price" 
-              required />
-
-            <v-text-field 
-              v-model="data.quantity" 
-              label="Quantity" 
-              type="number" 
-              required />
+          <v-text-field 
+            v-model="data.quantity" 
+            label="Quantity" 
+            type="number" 
+            required />
 
 
-            <v-file-input 
-              v-model="image" 
-              placeholder="Upload your documents" 
-              label="File input"
-              prepend-icon="mdi-paperclip" 
-              @change="imgUpload" />
-            <!-- <v-text-field
-              v-model="image"
-              type="file"
-              required
-              /> -->
-            <div class="btnCenter">
-              <v-btn 
-                class="btnSub" 
-                @click="handleSubmit">
-                Submit
-              </v-btn>
-              <v-btn 
-                class="btnClose" 
-                @click="modal">
-                Close
-              </v-btn>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-layout>
-      <!-- </v-app> -->
-    </v-container>
-  </div>
+          <v-file-input 
+            placeholder="Upload your documents" 
+            label="File input"
+            prepend-icon="mdi-paperclip" 
+            @change="imgUpload" />
+          
+          <div class="btnCenter">
+            <v-btn 
+              class="btnClose" 
+              @click="dialog = false">
+              Close
+            </v-btn>
+            <v-btn 
+              class="btnSub" 
+              @click="handleSubmit">
+              Submit
+            </v-btn>
+          </div>
+        </v-card-text>
+      </v-card>
+      
+    </v-dialog>
+  </v-row>
 </template>
 
 
@@ -74,6 +73,7 @@ export default {
   
   name: 'AddProducts',
   data: () => ({
+    dialog: false,
     countries: ['Accessories', 'Fashion', 'Mobile Phones', 'Laptops'],
     image:[],
     data: {
@@ -85,22 +85,15 @@ export default {
       cardOne:'start'
     }
   }),
-  computed: {
-    ...mapGetters('addProd',['isModal']),
-    showModal() {
-      return this.isModal
-      // return this.$store.getters['addProd/isModal']
-    }
-  },
   methods: {
     ...mapActions('addProd',['changeModal', 'appendList']),
     handleSubmit(e) {
       e.preventDefault()
       // console.log(this.data);
       this.appendList(this.data)
+      this.dialog=false
       this.data={}
       this.image=[]
-      this.changeModal()
     },
     imgUpload(e) {
       // console.log(e);
@@ -124,16 +117,20 @@ export default {
 </script>
 
 <style scoped>
-.modal {
-  backdrop-filter: blur(7px);
-  position: absolute;
-  z-index: 1;
-  max-width: 100%;
+.v-dialog__container {
+    display: unset; 
+}
+.v-dialog__content--active {
+  height: 70%;
+    backdrop-filter: blur(3px);
 }
 
-.addBtn {
+
+.row{
+  justify-content: flex-end;
   margin: 10px 30px 10px 10px;
-  float: right;
+}
+.addBtn {
   background-color: transparent !important;
   border: 2px solid #00693E;
 }
@@ -170,11 +167,4 @@ export default {
   justify-content: center;
 }
 
-
-.layout {
-  display: block !important;
-  flex: none !important;
-  width: 500px;
-  margin: 0 auto;
-}
 </style>

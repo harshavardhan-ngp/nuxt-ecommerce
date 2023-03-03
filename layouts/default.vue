@@ -1,5 +1,33 @@
 <template>
   <div>
+    <v-tabs
+      fixed-tabs
+      background-color="#00693E"
+    >
+      <v-tab>
+        <NuxtLink 
+          to="/">
+          Shop
+        </NuxtLink>
+      </v-tab>
+      <v-tab>
+        <NuxtLink 
+          to="/cart">
+          Cart
+        </NuxtLink>
+      </v-tab>
+      <v-tab>
+        <NuxtLink 
+          to="/wishlist">
+          Wishlist
+        </NuxtLink>
+      </v-tab>
+    </v-tabs>
+    <nuxt />
+  </div>
+</template>
+<!-- <template>
+  <div>
     <div class="header">
       <NuxtLink 
         class="hmebtn" 
@@ -29,9 +57,16 @@
     </div>
     <div class="footer"/>
   </div>
-</template>
+</template> -->
 
 <style scoped>
+.v-tab a{
+  color: white !important;
+  text-decoration: none !important;
+}
+.v-tab--active:before{
+  opacity: 0.11 !important;
+}
 .hmebtn{
   padding: 0 15px;
 }

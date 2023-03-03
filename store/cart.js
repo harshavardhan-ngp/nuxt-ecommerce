@@ -81,6 +81,7 @@ const actions={
         commit('delFromCart')
     }
 };
+
 export default{
     state,
     mutations,

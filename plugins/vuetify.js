@@ -7,6 +7,7 @@ import "@mdi/font/css/materialdesignicons.css";
 Vue.use(Vuetify)
 export default (ctx) => {
     const vuetify = new Vuetify({
+      ssr: true,
       icons: {
         iconfont: 'fa' || 'md',
       },
