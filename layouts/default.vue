@@ -68,7 +68,7 @@
   opacity: 0.11 !important;
 }
 .v-tab:before,.v-tabs-slider {
-background-color:white !important;
+background-color:white;
 }
 .hmebtn{
   padding: 0 15px;
