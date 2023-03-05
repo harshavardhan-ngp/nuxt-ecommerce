@@ -1,7 +1,6 @@
 <template>
   <div>
     <div 
-     
       :class="'loginForm'">
       <v-sheet 
         width="300" 
@@ -20,7 +19,6 @@
           
           <v-btn 
             class="logBtn"
-            rounded="lg" 
             color="primary" 
             @click="onSubmit">
             Login
@@ -51,9 +49,8 @@
             type="password" />
           <v-btn 
             class="logBtn"
-            rounded="lg" 
             color="primary" 
-            @click="onSubmit">
+            @click="onRegister">
             Register
           </v-btn>
           <p class="mt-4">Don't have an account? <span
@@ -66,6 +63,7 @@
 </template>
   
   <script>
+
   export default {
     data() {
       return {
@@ -89,6 +87,13 @@
         localStorage.setItem('password', this.login.password)
         this.$router.push('/')
         // this.$toaster('signIN','success')
+      },
+      onRegister(e){
+        e.preventDefault()
+        localStorage.setItem('email', this.reg.email)
+        localStorage.setItem('password', this.reg.password)
+        this.$router.push('/')
+        
       }
     }
   

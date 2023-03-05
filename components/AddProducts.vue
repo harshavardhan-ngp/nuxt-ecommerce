@@ -1,6 +1,5 @@
 <template>
   <v-row 
-    justify="center" 
     data-app>
     <v-dialog
       v-model="dialog"
@@ -8,6 +7,11 @@
       max-width="600px"
     >
       <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          class="showAll"
+        >
+          Show All
+        </v-btn>
         <v-btn
           v-bind="attrs"
           class="addBtn"
@@ -42,6 +46,7 @@
 
 
           <v-file-input 
+            v-model="image"
             placeholder="Upload your documents" 
             label="File input"
             prepend-icon="mdi-paperclip" 
@@ -117,6 +122,10 @@ export default {
 </script>
 
 <style scoped>
+.showAll{
+  background-color: black !important;
+  color: #fff !important;
+}
 .v-dialog__container {
     display: unset; 
 }
@@ -127,7 +136,7 @@ export default {
 
 
 .row{
-  justify-content: flex-end;
+  justify-content: space-between;
   margin: 10px 30px 10px 10px;
 }
 .addBtn {

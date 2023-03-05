@@ -79,7 +79,7 @@
               <div class="btnCenter">
                 <v-btn 
                   class="btnClose" 
-                  @click="dialog = false, formDialog=false">
+                  @click="dialog = false, formDialog=false, data={}">
                   Close
                 </v-btn>
                 <v-btn 

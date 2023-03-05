@@ -1,6 +1,9 @@
 <template>
   <div>
-    <AddProducts />
+    <div>
+      
+      <AddProducts />
+    </div>
     <v-container >
       <v-row>
         <v-col 
@@ -55,7 +58,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default{
   data() {
@@ -64,9 +67,10 @@ export default{
     };
   },
     computed:{
+      ...mapGetters('addProd',['showList']),
         disp(){
             // console.log(this.$store.state.addProd.prodList);
-            let data= this.$store.state.addProd.prodList
+            let data= this.showList
             // console.log('data:',data);
             return data
         }
@@ -88,6 +92,7 @@ export default{
 </script>
 
 <style scoped>
+
 .v-image
 {
   margin: auto;

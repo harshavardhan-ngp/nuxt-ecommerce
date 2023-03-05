@@ -1,65 +1,95 @@
 <template>
   <div>
-    <v-tabs
-      fixed-tabs
-      background-color="#00693E"
+
+    <v-toolbar 
+      class="navbar" 
     >
-      <v-tab>
-        <NuxtLink 
-          to="/">
-          Shop
-        </NuxtLink>
-      </v-tab>
-      <v-tab>
-        <NuxtLink 
-          to="/cart">
-          Cart
-        </NuxtLink>
-      </v-tab>
-      <v-tab>
-        <NuxtLink 
-          to="/wishlist">
-          Wishlist
-        </NuxtLink>
-      </v-tab>
-    </v-tabs>
+      <v-app-bar-nav-icon/>
+
+      <v-toolbar-title class="appName">E-Commerce App</v-toolbar-title>
+
+      <v-spacer/>
+
+      <v-btn icon>
+        <v-icon 
+          class="logOff" 
+          @click="logout">mdi-power</v-icon>
+      </v-btn>
+
+      <template v-slot:extension>
+       
+        <v-tabs
+          background-color="#00693E"
+        >
+          <v-tab>
+            <NuxtLink 
+              to="/"
+              class="navtabs">
+              Shop
+            </NuxtLink>
+          </v-tab>
+          <v-tab>
+            <NuxtLink 
+              to="/cart" 
+              class="navtabs">
+              Cart
+            </NuxtLink>
+          </v-tab>
+         
+        </v-tabs>
+      </template>
+    </v-toolbar>
     <nuxt />
   </div>
 </template>
-<!-- <template>
-  <div>
-    <div class="header">
-      <NuxtLink 
-        class="hmebtn" 
-        to="/">
-        <button>
-          Shop
-        </button>
-      </NuxtLink>
-      <NuxtLink 
-        class="hmebtn" 
-        to="/cart">
-        <button>
-          Cart
-        </button>
-      </NuxtLink>
-      <NuxtLink 
-        class="hmebtn" 
-        to="/wishlist">
-        <button>
-          Wishlist
-        </button>
-      </NuxtLink>
-    </div>
-    <div class="main">
-      
-      <nuxt/>
-    </div>
-    <div class="footer"/>
-  </div>
-</template> -->
+
+<script>
+export default {
+  data () {
+    return {
+      model: 'tab-2',
+    }
+  },
+  methods:{
+    logout(){
+      localStorage.removeItem('email')
+      localStorage.removeItem('password')
+      this.$router.push('/login')
+    }
+  }
+}
+</script>
 
 <style scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
+.appName{
+  font-family: 'Tilt Prism', cursive;
+  font-weight:700 ;
+  font-size: 35px;
+
+}
+.logOff{
+  color: #fff !important;
+}
+.v-toolbar,.v-sheet{
+  background-color: #00693E !important;
+  color: #fff !important;
+}
+.navtabs{
+  width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.v-tab{
+  width: 100%;
+  max-width: 100%;
+}
+.v-slide-group__content, .v-tabs-bar__content{
+  justify-content: center !important;
+  background-color: aqua !important;
+}
 .v-tab a{
   color: white !important;
   text-decoration: none !important;

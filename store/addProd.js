@@ -47,6 +47,7 @@ const mutations={
         state.prodList=state.prodList.filter(ele=>{ return ele.id != payload})
     },
     updtFromList(state, payload){
+        state.editForm=[]
         state.editForm.push(state.prodList.find(ele=>ele.id==payload))
         console.log('updtPayload:',state.editForm, payload);
     },
