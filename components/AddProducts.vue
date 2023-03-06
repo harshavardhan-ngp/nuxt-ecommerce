@@ -9,6 +9,7 @@
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           class="showAll"
+          @click="showAll"
         >
           Show All
         </v-btn>
@@ -20,51 +21,61 @@
           Add +
         </v-btn>
       </template>
-      <v-card >
-        <v-card-text>
-          <v-text-field 
-            v-model="data.pname" 
-            label="Product Name" 
-            required />
+      <v-card>
+        <v-form ref="form">
+          <v-card-text>
+            <v-text-field 
+              v-model="data.pname"
+              :rules="nameRules"
+              class="error"
+              label="Product Name" 
+              required />
 
-          <v-autocomplete 
-            :items="countries" 
-            v-model="data.ptype" 
-            label="Product Type" 
-            required />
+            <v-autocomplete 
+              :items="countries" 
+              v-model="data.ptype" 
+              :rules="[v => !!v || 'Type is required']"
+              label="Product Type" 
+              required />
 
-          <v-text-field 
-            v-model="data.price" 
-            label="Price" 
-            required />
+            <v-text-field 
+              v-model="data.price" 
+              :rules="[v => !!v || 'Price is required']"
+              label="Price" 
+              required />
 
-          <v-text-field 
-            v-model="data.quantity" 
-            label="Quantity" 
-            type="number" 
-            required />
+            <v-text-field 
+              v-model="data.quantity" 
+              :rules="[v => !!v || 'Quantity is required']"
+              label="Quantity" 
+              type="number" 
+              required />
 
 
-          <v-file-input 
-            v-model="image"
-            placeholder="Upload your documents" 
-            label="File input"
-            prepend-icon="mdi-paperclip" 
-            @change="imgUpload" />
+            <v-file-input 
+              v-model="image"
+              :rules="[v => !!v || 'Image is required']" 
+              accept="image/*"
+              placeholder="Upload your documents"
+              label="File input"
+              prepend-icon="mdi-paperclip" 
+              @change="imgUpload" />
           
-          <div class="btnCenter">
-            <v-btn 
-              class="btnClose" 
-              @click="dialog = false">
-              Close
-            </v-btn>
-            <v-btn 
-              class="btnSub" 
-              @click="handleSubmit">
-              Submit
-            </v-btn>
-          </div>
-        </v-card-text>
+            <div class="btnCenter">
+              <v-btn 
+                class="btnClose" 
+                @click="closeDialog">
+                Close
+              </v-btn>
+              <!-- :disabled="formValid" -->
+              <v-btn 
+                class="btnSub" 
+                @click="handleSubmit">
+                Submit
+              </v-btn>
+            </div>
+          </v-card-text>
+        </v-form>
       </v-card>
       
     </v-dialog>
@@ -73,11 +84,12 @@
 
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 export default {
   
   name: 'AddProducts',
   data: () => ({
+    valid: true,
     dialog: false,
     countries: ['Accessories', 'Fashion', 'Mobile Phones', 'Laptops'],
     image:[],
@@ -88,40 +100,58 @@ export default {
       price: null,
       quantity: null,
       cardOne:'start'
-    }
+    },
+    nameRules: [
+        v => !!v || 'Name is required',
+      ],
   }),
   methods: {
-    ...mapActions('addProd',['changeModal', 'appendList']),
+    ...mapActions('addProd',['changeModal', 'appendList', 'setType']),
     handleSubmit(e) {
       e.preventDefault()
-      // console.log(this.data);
-      this.appendList(this.data)
-      this.dialog=false
-      this.data={}
-      this.image=[]
+      if(this.data.img && this.data.pname && this.data.ptype && this.data.quantity && this.data.price){
+        // console.log(this.data);
+        this.appendList(this.data)
+        this.dialog=false
+        this.data={}
+        this.image=[]
+        this.$refs.form.resetValidation()
+      }
     },
     imgUpload(e) {
-      // console.log(e);
+      this.data['imgName']=e
       const reader = new FileReader()
-
-      let rawImg;
+      let rawImg
       reader.onloadend =(e) => {
         rawImg = reader.result;
         this.data.img=e.target.result
-        // console.log('e:',e);
       }
-      // this.data.image=rawImg
       reader.readAsDataURL(e)
       // console.log("e:",this.data)
     },
     modal() {
       this.changeModal()
+    },
+    showAll(){
+      this.setType('')
+    },
+    closeDialog(){
+      // console.log('reset:',this.$refs.form);
+      this.$refs.form.resetValidation()
+      this.dialog = false;
+      this.data={}
+      this.image=[]
     }
   },
 }
 </script>
 
 <style scoped>
+.error--text{
+  color: orangered !important;
+  font-size: 13px !important;
+  font-weight: bold !important;
+}
 .showAll{
   background-color: black !important;
   color: #fff !important;

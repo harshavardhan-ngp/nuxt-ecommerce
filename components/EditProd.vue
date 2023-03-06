@@ -11,7 +11,7 @@
         class="edit"
         v-on="on"
         @click="getEdit"
-      >mdi-file-edit-outline</v-icon>
+      >mdi-square-edit-outline</v-icon>
        
     </template>
     <v-card>
@@ -44,52 +44,61 @@
 
           </template>
           <v-card >
-            <v-card-text v-if="data.length>0">
-              <v-text-field 
-                v-model="data[0].pname" 
-                label="Product Name" 
-                required />
+            <v-form ref="form">
+              <v-card-text v-if="data.length>0">
+                <v-text-field 
+                  v-model="data[0].pname" 
+                  :rules="[v => !!v || 'Name is required']"
+                  label="Product Name" 
+                  required />
 
-              <!-- :items="countries"  -->
-              <v-autocomplete 
-                :items="countries" 
-                v-model="data[0].ptype" 
-                label="Product Type" 
-                required />
+                <!-- :items="countries"  -->
+                <v-autocomplete 
+                  :items="countries" 
+                  :rules="[v => !!v || 'Type is required']"
+                  v-model="data[0].ptype" 
+                  label="Product Type" 
+                  required />
 
-              <v-text-field 
-                v-model="data[0].price" 
-                label="Price" 
-                required />
+                <v-text-field 
+                  v-model="data[0].price" 
+                  :rules="[v => !!v || 'Price is required']"
+                  label="Price" 
+                  required />
 
-              <v-text-field 
-                v-model="data[0].quantity" 
-                label="Quantity" 
-                type="number" 
-                required />
+                <v-text-field 
+                  v-model="data[0].quantity" 
+                  :rules="[v => !!v || 'Quantity is required']"
+                  label="Quantity" 
+                  type="number" 
+                  required />
 
-              <v-file-input 
-                placeholder="Upload your documents" 
-                label="File input"
-                prepend-icon="mdi-paperclip" 
-                @change="imgUpload"
-              />
-              <!-- @change="imgUpload"  -->
+                <v-file-input 
+                  v-model="data[0].imgName"
+                  :rules="[v => !!v || 'Image is required']"
+                  accept="image/*"
+                  placeholder="Upload your documents" 
+                  label="File input"
+                  prepend-icon="mdi-paperclip" 
+                  @change="imgUpload"
+                />
+                <!-- @change="imgUpload"  -->
           
-              <div class="btnCenter">
-                <v-btn 
-                  class="btnClose" 
-                  @click="dialog = false, formDialog=false, data={}">
-                  Close
-                </v-btn>
-                <v-btn 
-                  class="btnSub" 
-                  @click="handleSubmit"
-                >
-                  Update
-                </v-btn>
-              </div>
-            </v-card-text>
+                <div class="btnCenter">
+                  <v-btn 
+                    class="btnClose" 
+                    @click="dialog = false, formDialog=false, data={}">
+                    Close
+                  </v-btn>
+                  <v-btn 
+                    class="btnSub" 
+                    @click="handleSubmit"
+                  >
+                    Update
+                  </v-btn>
+                </div>
+              </v-card-text>
+            </v-form>
           </v-card>
         </v-dialog>
         <v-btn 
@@ -130,21 +139,25 @@ export default {
   }),
   computed:{
     ...mapGetters('addProd',['editProd']),
-    // editData(){
-        //     return this.editForm
-        // }
+
     },
   methods:{
-    ...mapActions('addProd', ['delProd', 'updtProd']),
+    ...mapActions('addProd', ['delProd', 'updtProd', 'updtList']),
     delBtn(){
         this.delProd(this.prodId)
     },
     handleSubmit(e) {
       e.preventDefault()
       console.log('submit:',this.data[0]);
+      if(this.data[0].img && this.data[0].pname && this.data[0].ptype && this.data[0].quantity && this.data[0].price){
+        // console.log(this.data);
+        this.updtList(this.data[0])
+        this.dialog=false
+        this.data={}
+        this.image=[]
+        this.$refs.form.resetValidation()
+      }
       // this.appendList(this.data)
-      this.dialog=false
-      this.data={}
       // this.image=[]
     },
     imgUpload(e) {
@@ -178,7 +191,7 @@ export default {
 <style scoped>
 .edit:hover{
   cursor: pointer;
-  color: #BA0021;
+  color: black;
 }
 .v-dialog__content--active {
   height: 70%;

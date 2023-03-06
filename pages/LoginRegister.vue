@@ -63,7 +63,6 @@
 </template>
   
   <script>
-
   export default {
     data() {
       return {
@@ -89,6 +88,9 @@
         // this.$toaster('signIN','success')
       },
       onRegister(e){
+        if(this.reg.password !=this.reg.cnfpassword){
+          return this.$toast.error('Incorrect Password!!');
+        }
         e.preventDefault()
         localStorage.setItem('email', this.reg.email)
         localStorage.setItem('password', this.reg.password)

@@ -74,7 +74,7 @@ export default{
         ...mapState('addProd',['prodList']),
         ...mapGetters('cart',['showCart']),
         getList(){
-            // console.log(this.showCart);
+            console.log(this.showCart);
             return this.showCart
         }
     },
@@ -82,6 +82,9 @@ export default{
         ...mapActions('cart',['addQuan', 'delQuan', 'removeFromCart']),
         increase(ind){
           const data = this.prodList.find(ele=> ele.id==ind)
+          // console.log('addQUAN:',data);
+          if(data.quantity==0)
+          return this.$toast.error('No Stocks Left !!');
           this.addQuan(data)
         },
         decrease(ind){

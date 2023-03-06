@@ -1,7 +1,6 @@
 <template>
   <div>
     <div>
-      
       <AddProducts />
     </div>
     <v-container >
@@ -17,6 +16,7 @@
           <!-- :class="{ flipme: items.cardOne == 'flipped' }"
           class="card" -->
           <v-card 
+            :class="[colors[items.genRandom]]"
             width="244"
           >
             <!-- class="mx-auto card__face card__face--front"  -->
@@ -35,7 +35,7 @@
               <v-card-actions>
                 <v-btn 
                   variant="text" 
-                  @click="addToCart(items,ind)">
+                  @click="addToCart(items)">
                   <v-icon>mdi-cart-outline</v-icon>
                 </v-btn>
                 <v-spacer/>
@@ -63,35 +63,55 @@ import { mapActions, mapGetters, mapState } from 'vuex';
 export default{
   data() {
     return {
-      methodName: "start"
+      colors:['aliceblue','antiquewhite','cornsilk','mistyrose','lightsteelblue']
     };
   },
     computed:{
       ...mapGetters('addProd',['showList']),
         disp(){
-            // console.log(this.$store.state.addProd.prodList);
-            let data= this.showList
-            // console.log('data:',data);
-            return data
+            return this.showList
         }
     },
     methods:{
       ...mapActions('cart', ['appendCart']),
       ...mapActions('addProd', ['delProd']),
-      addToCart(list,ind){
-        // let data={...list, list[quantity]=1}
-        list['id']=ind
+      addToCart(list){
         this.appendCart(list)        
       },
       delItem(id){
         this.delProd(id)
       },
+      
 
     }
 }
 </script>
 
 <style scoped>
+.aliceblue{
+  background-color: #8EC5FC;
+background-image: linear-gradient(62deg, #8EC5FC 0%, #e4c3fc 50%, #ffffff 100%);
+
+
+}
+.antiquewhite{
+  background-color: #FFDEE9;
+background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
+
+}
+.cornsilk{
+  background-color: #FAACA8;
+background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);
+
+}
+.mistyrose{
+  background-color: #85FFBD;
+background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
+
+}
+.lightsteelblue{
+  background-image: linear-gradient( 92.7deg,  rgba(245,212,212,1) 8.5%, rgba(252,251,224,1) 90.2% );
+}
 
 .v-image
 {

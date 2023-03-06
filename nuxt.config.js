@@ -43,7 +43,9 @@ module.exports = {
   */
 
   plugins: [
-    '@/plugins/vuetify'
+    '@/plugins/vuetify',
+    '@/plugins/vuelidate',
+
   ],
   
   /*
@@ -52,6 +54,7 @@ module.exports = {
  modules: [
     '@nuxtjs/router',
     'nuxt-material-design-icons-iconfont',
+    "vue-toastification/nuxt",
 
   ],
 

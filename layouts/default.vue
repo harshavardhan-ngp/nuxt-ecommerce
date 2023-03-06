@@ -1,29 +1,45 @@
 <template>
   <div>
-
     <v-toolbar 
       class="navbar" 
     >
-      <v-app-bar-nav-icon/>
-
       <v-toolbar-title class="appName">E-Commerce App</v-toolbar-title>
-
       <v-spacer/>
-
-      <v-btn icon>
-        <v-icon 
-          class="logOff" 
-          @click="logout">mdi-power</v-icon>
+      <v-btn
+        class="ma-2 logoutBtn"
+        @click="logout"
+      >
+        LogOut
+        <v-icon
+          right
+        >
+          mdi-exit-to-app
+        </v-icon>
       </v-btn>
-
+      <!-- <div>
+        <span>LogOut</span>
+        <v-btn icon>
+          <v-icon 
+            class="logOff" 
+            @click="logout">mdi-exit-to-app</v-icon>
+        </v-btn>
+      </div> -->
       <template v-slot:extension>
-       
         <v-tabs
+          align-with-title
           background-color="#00693E"
         >
+          <v-tabs-slider color="yellow"/>
           <v-tab>
             <NuxtLink 
               to="/"
+              class="navtabs">
+              Home
+            </NuxtLink>
+          </v-tab>
+          <v-tab>
+            <NuxtLink 
+              to="/shop"
               class="navtabs">
               Shop
             </NuxtLink>
@@ -35,7 +51,6 @@
               Cart
             </NuxtLink>
           </v-tab>
-         
         </v-tabs>
       </template>
     </v-toolbar>
@@ -62,11 +77,17 @@ export default {
 
 <style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
-.appName{
+.logoutBtn{
+  color: #fff !important;
+  background-color: transparent !important;
+  /* border: none ; */
+  box-shadow: none;
+}
+  .appName{
   font-family: 'Tilt Prism', cursive;
   font-weight:700 ;
   font-size: 35px;
-
+  
 }
 .logOff{
   color: #fff !important;
@@ -81,14 +102,12 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-}
+    font-family: 'Tilt Prism', cursive;
+    font-weight:700 ;
+  }
 .v-tab{
   width: 100%;
   max-width: 100%;
-}
-.v-slide-group__content, .v-tabs-bar__content{
-  justify-content: center !important;
-  background-color: aqua !important;
 }
 .v-tab a{
   color: white !important;
@@ -97,7 +116,7 @@ export default {
 .v-tab--active:before{
   opacity: 0.11 !important;
 }
-.v-tab:before,.v-tabs-slider {
+.v-tab .router-link-exact-active:before{
 background-color:white;
 }
 .hmebtn{
