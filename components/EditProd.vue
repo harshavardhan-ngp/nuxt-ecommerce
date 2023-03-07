@@ -137,6 +137,8 @@ export default {
     ...mapActions('addProd', ['delProd', 'getProd', 'updtList']),
     delBtn(){
         this.delProd(this.prodId)
+        this.$toast.error('Item Deleted');  
+
     },
     handleSubmit(e) {
       e.preventDefault()
@@ -148,6 +150,8 @@ export default {
         this.data={}
         this.image=[]
         this.$refs.form.resetValidation()
+        this.$toast.warning('Item Updated');     
+
       }
       // this.appendList(this.data)
       // this.image=[]
@@ -181,6 +185,7 @@ export default {
     },
     getEditData(){
         this.getProd(this.prodId)
+
     },
 },
 

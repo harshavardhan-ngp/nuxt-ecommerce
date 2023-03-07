@@ -70,7 +70,8 @@ export default{
       ...mapActions('cart', ['appendCart']),
       ...mapActions('addProd', ['delProd']),
       addToCart(list){
-        this.appendCart(list)        
+        this.appendCart(list)   
+        this.$toast.warning('Added to the Cart');     
       },
       delItem(id){
         this.delProd(id)

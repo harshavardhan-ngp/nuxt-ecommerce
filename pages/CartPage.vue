@@ -143,16 +143,15 @@ cursor: pointer;
   padding: 0px 10px;
 }
 .table{
-	max-height: 528px;
+	max-height: 528px !important;
   /* background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%); */
 }
 .v-data-table {
-	overflow: auto;
+	overflow: auto !important;
 }
 .v-data-table /deep/ .v-data-table__wrapper {
-	overflow: unset;
+	overflow: unset !important;
 }
-
 th{
   text-align: center!important;
   padding: 20px 15px !important;
