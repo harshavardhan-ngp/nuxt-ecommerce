@@ -4,7 +4,7 @@ import Login from './pages/LoginRegister'
 import Home from './pages/HomePage'
 import Shop from './pages/ShopPage'
 import Cart from './pages/CartPage'
-import Wishlist from './pages/WishList'
+import Profile from './pages/Profile'
 
 Vue.use(Router)
 
@@ -29,8 +29,8 @@ export function createRouter() {
         component: Cart
       },
       {
-        path: '/wishlist',
-        component: Wishlist
+        path: '/profile',
+        component: Profile
       },
     ]
   })

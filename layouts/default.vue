@@ -37,9 +37,13 @@
         </template>
 
         <v-list >
-          <v-list-item class="menu">
-            Profile
-          </v-list-item>
+          <NuxtLink 
+            to="/profile"
+            class="menutabs">
+            <v-list-item class="menu">
+              Profile
+            </v-list-item>
+          </NuxtLink>
           <v-list-item 
             class="menu" 
             @click="logout">
@@ -113,6 +117,9 @@ export default {
   @import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
+  .menutabs{
+    text-decoration: none;
+  }
   .v-menu__content>.v-list{
     background-color: #fff !important;
   }
