@@ -1,10 +1,9 @@
 <template>
-  <v-card
-    max-width="400"
-    class="mx-auto"
-    style="background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%);;"
-  >
-    <v-container>
+  <v-container>
+    <v-card
+      class="mx-auto"
+      style="background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%);;"
+    >
       <h1>Total</h1>
       <table class="table">
         <thead class="thead">
@@ -12,12 +11,20 @@
             <th>
               Name
             </th>
-          
+            <th>
+              Image
+            </th>
+            <th>
+              Type
+            </th>
+            <th>
+              Unit-Price
+            </th>
             <th>
               Quantity
             </th>
             <th>
-              Cost
+              Sub-Total
             </th>
           </tr>
         </thead>
@@ -26,11 +33,27 @@
             v-for="(items,ind) in getList"
             :key="ind"
           >
-            <td v-if="items.total>0">{{ items.pname }}</td>
-            <td v-if="items.total>0">
+            <td style="text-transform: capitalize;">{{ items.pname }}</td>
+            <td><v-img 
+              :src=" items.img"/></td>
+            <td>{{ items.ptype }}</td>
+            <td>{{ items.price }}</td>
+            <td>
+              <v-icon 
+                class="del" 
+                @click="decrease(items.id)" >mdi-minus-box-outline</v-icon>
               {{ items.quantity }}
+              <v-icon 
+                class="add" 
+                @click="increase(items.id)">mdi-plus-box-outline</v-icon>
             </td>
             <td v-if="items.total>0">{{ items.total }}</td>
+            <td v-else>
+              <v-icon 
+                class="remove" 
+                @click="remove(items.id)"
+              >mdi-delete-circle</v-icon>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -38,8 +61,8 @@
         <h4>Total:</h4>
         <span>{{ getTotal }}</span>
       </div>
-    </v-container>
-  </v-card>
+    </v-card>
+  </v-container>
 </template>
 
 <!-- v-if="items.total>0"  -->
@@ -67,6 +90,12 @@ export default{
 </script>
 
 <style scoped>
+.v-image
+{
+  margin: auto;
+  height: 80px;
+  width: 80px;
+}
 .total{
     display: flex;
     justify-content: flex-end;

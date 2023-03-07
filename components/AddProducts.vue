@@ -8,6 +8,7 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
+          v-if="isType"
           class="showAll"
           @click="showAll"
         >
@@ -84,7 +85,7 @@
 
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 export default {
   
   name: 'AddProducts',
@@ -99,14 +100,20 @@ export default {
       ptype: null,
       price: null,
       quantity: null,
-      cardOne:'start'
     },
     nameRules: [
         v => !!v || 'Name is required',
       ],
   }),
+  computed:{
+    ...mapGetters('addProd',['showType']),
+    isType(){
+      return this.showType
+
+    }
+  },
   methods: {
-    ...mapActions('addProd',['changeModal', 'appendList', 'setType']),
+    ...mapActions('addProd',['appendList', 'setType']),
     handleSubmit(e) {
       e.preventDefault()
       if(this.data.img && this.data.pname && this.data.ptype && this.data.quantity && this.data.price){
@@ -128,9 +135,6 @@ export default {
       }
       reader.readAsDataURL(e)
       // console.log("e:",this.data)
-    },
-    modal() {
-      this.changeModal()
     },
     showAll(){
       this.setType('')
@@ -163,20 +167,50 @@ export default {
   height: 70%;
     backdrop-filter: blur(3px);
 }
-
+.showAll, .addBtn{
+  margin:0px 15px
+}
 
 .row{
-  justify-content: space-between;
+  justify-content: center;
   margin: 10px 30px 10px 10px;
 }
 .addBtn {
-  background-color: transparent !important;
-  border: 2px solid #00693E;
+  /* background-color: transparent !important;
+  border: 2px solid #00693E; */
+  color: black;
+	cursor: pointer;
+	display: block;
+	position: relative;
+	border: 2px solid #00693E;
+	transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+  
 }
 
 .addBtn:hover {
-  background-color: #00693E !important;
-  color: white;
+  /* background-color: #00693E !important;
+  color: white; */
+  color: #fff !important;
+	background-color: #00693E !important;
+	text-shadow: ntwo;
+}
+.addBtn:hover::before {
+  top: 0%;
+	bottom: auto;
+	height: 100%;
+}
+.addBtn::before {
+  display: block;
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	height: 0px;
+	width: 100%;
+	z-index: -1;
+	content: '';
+	color: #000 !important;
+	background: #00693E;
+	transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
 }
 
 .btnSub,

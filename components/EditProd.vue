@@ -10,19 +10,16 @@
         v-bind="attrs"
         class="edit"
         v-on="on"
-        @click="getEdit"
+        @click="getEditData"
       >mdi-square-edit-outline</v-icon>
        
     </template>
     <v-card>
       <v-toolbar
-        class="toolbar"
         dark
-        color="primary"
       >
         <v-btn
           icon
-          dark
           @click="dialog = false"
         >
           <v-icon>mdi-close</v-icon>
@@ -45,9 +42,9 @@
           </template>
           <v-card >
             <v-form ref="form">
-              <v-card-text v-if="data.length>0">
+              <v-card-text v-if="data">
                 <v-text-field 
-                  v-model="data[0].pname" 
+                  v-model="data.pname" 
                   :rules="[v => !!v || 'Name is required']"
                   label="Product Name" 
                   required />
@@ -56,25 +53,25 @@
                 <v-autocomplete 
                   :items="countries" 
                   :rules="[v => !!v || 'Type is required']"
-                  v-model="data[0].ptype" 
+                  v-model="data.ptype" 
                   label="Product Type" 
                   required />
 
                 <v-text-field 
-                  v-model="data[0].price" 
+                  v-model="data.price" 
                   :rules="[v => !!v || 'Price is required']"
                   label="Price" 
                   required />
 
                 <v-text-field 
-                  v-model="data[0].quantity" 
+                  v-model="data.quantity" 
                   :rules="[v => !!v || 'Quantity is required']"
                   label="Quantity" 
                   type="number" 
                   required />
 
                 <v-file-input 
-                  v-model="data[0].imgName"
+                  v-model="data.imgName"
                   :rules="[v => !!v || 'Image is required']"
                   accept="image/*"
                   placeholder="Upload your documents" 
@@ -127,12 +124,7 @@ export default {
     image:'',
     countries: ['Accessories', 'Fashion', 'Mobile Phones', 'Laptops'],
     data: {
-      img:[],
-      pname: null,
-      ptype: null,
-      price: null,
-      quantity: null,
-      cardOne:'start'
+      
     },
     dialog: false,
     formDialog: false,
@@ -142,16 +134,16 @@ export default {
 
     },
   methods:{
-    ...mapActions('addProd', ['delProd', 'updtProd', 'updtList']),
+    ...mapActions('addProd', ['delProd', 'getProd', 'updtList']),
     delBtn(){
         this.delProd(this.prodId)
     },
     handleSubmit(e) {
       e.preventDefault()
-      console.log('submit:',this.data[0]);
-      if(this.data[0].img && this.data[0].pname && this.data[0].ptype && this.data[0].quantity && this.data[0].price){
+      console.log('submit:',this.data);
+      if(this.data.img && this.data.pname && this.data.ptype && this.data.quantity && this.data.price){
         // console.log(this.data);
-        this.updtList(this.data[0])
+        this.updtList(this.data)
         this.dialog=false
         this.data={}
         this.image=[]
@@ -167,7 +159,7 @@ export default {
       let rawImg;
       reader.onloadend =(e) => {
         rawImg = reader.result;
-        this.data[0].img=e.target.result
+        this.data.img=e.target.result
         // console.log('e:',e);
       }
       // this.data.image=rawImg
@@ -175,13 +167,21 @@ export default {
       // console.log("e:",this.data)
     },
     updtBtn(){
-        this.data=this.editProd
+      this.data['id']=this.editProd[0].id
+      this.data['img']=this.editProd[0].img
+      this.data['pname']=this.editProd[0].pname
+      this.data['ptype']=this.editProd[0].ptype
+      this.data['price']=this.editProd[0].price
+      this.data['quantity']=this.editProd[0].quantity
+      this.data['imgName']=this.editProd[0].imgName
+      this.data['genRandom']=this.editProd[0].genRandom
+        // this.data=this.editProd
             console.log('data:',this.data);
 
         // this.updtProd(this.prodId)
     },
-    getEdit(){
-        this.updtProd(this.prodId)
+    getEditData(){
+        this.getProd(this.prodId)
     },
 },
 
@@ -189,9 +189,17 @@ export default {
 </script>
 
 <style scoped>
+.edit{
+  background-color: transparent;
+  margin: 4px 0 0 4px;
+  /* border: 1px solid rgba(0,0,0,.54);; */
+  /* border-radius: 33px; */
+}
 .edit:hover{
+  background-color: #fff;
   cursor: pointer;
   color: black;
+  border-radius: 10px;
 }
 .v-dialog__content--active {
   height: 70%;

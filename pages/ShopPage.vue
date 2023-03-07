@@ -13,24 +13,18 @@
           sm="6"
           xs="10"
         >
-          <!-- :class="{ flipme: items.cardOne == 'flipped' }"
-          class="card" -->
           <v-card 
-            :class="[colors[items.genRandom]]"
+            style="background-color: linen;"
             width="244"
           >
             <!-- class="mx-auto card__face card__face--front"  -->
             <div>
               <EditProd :prod-id="items.id"/>
-              <!-- class="wishlist"  -->
-              <!-- <v-icon 
-                class="edit"
-                @click="flip(items.id)">mdi-file-edit-outline</v-icon> -->
               <v-img 
                 :src="items.img"
               />
             </div>
-            <v-card-title style="justify-content: space-between;">
+            <v-card-title style="justify-content: space-between; font-family: 'Merienda', cursive;text-transform: capitalize;">
               {{ items.pname }}
               <v-card-actions>
                 <v-btn 
@@ -42,12 +36,12 @@
               </v-card-actions>
             </v-card-title>
           
-            <v-card-subtitle style="padding-bottom: 8px;">
+            <v-card-subtitle style="padding-bottom: 8px; font-family: 'Courgette', cursive;">
               {{ items.ptype }}
             </v-card-subtitle>
             <div>
-              <v-card-text style="padding: 3px 16px;">Price : <span>{{ items.price }}</span></v-card-text>
-              <v-card-text style="padding: 1px 16px 10px;">Available : <span>{{ items.quantity }}</span></v-card-text>
+              <v-card-text style="padding: 3px 16px;font-family: 'Tilt Neon', cursive;">Price : <span>{{ items.price }}</span></v-card-text>
+              <v-card-text style="padding: 1px 16px 10px;font-family: 'Tilt Neon', cursive;">Available : <span>{{ items.quantity }}</span></v-card-text>
             </div>
           </v-card>
           
@@ -58,7 +52,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default{
   data() {
@@ -88,6 +82,9 @@ export default{
 </script>
 
 <style scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Merienda:wght@900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
 .aliceblue{
   background-color: #8EC5FC;
 background-image: linear-gradient(62deg, #8EC5FC 0%, #e4c3fc 50%, #ffffff 100%);
@@ -118,5 +115,9 @@ background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
   margin: auto;
   height: 180px;
   width: 180px;
+}
+
+.v-card__title{
+  font-size: 1.1rem;
 }
 </style>

@@ -10,7 +10,6 @@ const state=()=>({
         ptype:'Mobile Phones',
         quantity:1,
         price:'12000',
-        cardOne:'start',
         imgName:'',
         genRandom:0
 
@@ -23,7 +22,56 @@ const state=()=>({
     ptype:'Laptops',
     quantity:3,
     price:'72000',
-    cardOne:'start',
+    genRandom:1
+    },
+    {
+        imgName:'',
+        id:3,
+        img:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+    pname:'Dell',
+    ptype:'Laptops',
+    quantity:3,
+    price:'72000',
+    genRandom:1
+    },
+    {
+        imgName:'',
+        id:4,
+        img:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+    pname:'Dell',
+    ptype:'Laptops',
+    quantity:3,
+    price:'72000',
+    genRandom:1
+    },
+    {
+        imgName:'',
+        id:5,
+        img:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+    pname:'Dell',
+    ptype:'Laptops',
+    quantity:3,
+    price:'72000',
+    genRandom:1
+    },
+    {
+        imgName:'',
+        id:6,
+        img:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+    pname:'Dell',
+    ptype:'Laptops',
+    quantity:3,
+    price:'72000',
+    genRandom:1
+    },
+    {
+        imgName:'',
+        id:7,
+        img:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+    pname:'Dell',
+    ptype:'Laptops',
+    quantity:3,
+    price:'72000',
     genRandom:1
     },
     ]
@@ -39,13 +87,13 @@ const getters={
     },
     editProd(state){
         return state.editForm
+    },
+    showType(state){
+        return state.filterType
     }
 };
 
 const mutations={
-    setModal(state){
-        state.showModal=!state.showModal
-    },
     addList(state, payload){
         payload['id']=state.id++
         payload['genRandom']=Math.floor(Math.random()*5)
@@ -56,15 +104,23 @@ const mutations={
         console.log('delPayload:',payload);
         state.prodList=state.prodList.filter(ele=>{ return ele.id != payload})
     },
-    updtFromList(state, payload){
+    getById(state, payload){
         state.editForm=[]
         state.editForm.push(state.prodList.find(ele=>ele.id==payload))
         console.log('updtPayload:',state.editForm, payload);
     },
     updtMainList(state, payload){
         const data=state.prodList.find(ele=>ele.id==payload.id)
-        console.log('listUpdate:', payload, data);
-        data=payload
+        data.id = payload.id
+        data.img = payload.img
+        data.pname = payload.pname
+        data.ptype = payload.ptype
+        data.price = payload.price
+        data.quantity = payload.quantity
+        data.imgName = payload.imgName
+        data.genRandom = payload.genRandom
+        console.log('listUpdate:', data, payload);
+        // data=payload
     },
     updateType(state, payload){
         state.filterType=payload
@@ -72,18 +128,14 @@ const mutations={
 };
 
 const actions={
-    changeModal({commit}){
-        console.log('in actions');
-        commit('setModal')
-    },
     appendList({commit}, payload){
         commit('addList', payload)
     },
     delProd({commit}, payload){
         commit('delFromList', payload)
     },
-    updtProd({commit}, payload){
-        commit('updtFromList', payload)
+    getProd({commit}, payload){
+        commit('getById', payload)
     },
     updtList({commit}, payload){
         commit('updtMainList', payload)

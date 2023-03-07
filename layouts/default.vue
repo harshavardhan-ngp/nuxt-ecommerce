@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div data-app>
     <v-toolbar 
       class="navbar" 
     >
       <v-toolbar-title class="appName">E-Commerce App</v-toolbar-title>
       <v-spacer/>
-      <v-btn
+      <!-- <v-btn
         class="ma-2 logoutBtn"
         @click="logout"
       >
@@ -15,7 +15,38 @@
         >
           mdi-exit-to-app
         </v-icon>
-      </v-btn>
+      </v-btn> -->
+      <v-menu
+        bottom
+        left
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            v-bind="attrs"
+            text
+            class="user"
+            v-on="on"
+          >
+            <v-icon>
+              mdi-account-circle
+            </v-icon>
+            <v-icon>
+              mdi-menu-down
+            </v-icon>
+          </v-btn>
+        </template>
+
+        <v-list >
+          <v-list-item class="menu">
+            Profile
+          </v-list-item>
+          <v-list-item 
+            class="menu" 
+            @click="logout">
+            Logout
+          </v-list-item>
+        </v-list>
+      </v-menu>
       <!-- <div>
         <span>LogOut</span>
         <v-btn icon>
@@ -63,6 +94,9 @@ export default {
   data () {
     return {
       model: 'tab-2',
+      more: [
+        'Profile', 'Logout'
+      ],
     }
   },
   methods:{
@@ -77,11 +111,35 @@ export default {
 
 <style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+  .v-menu__content>.v-list{
+    background-color: #fff !important;
+  }
+  .user{
+    color: #fff !important;
+    /* font-size: 25px !important; */
+  }
+  .menu{
+    cursor: pointer;
+    color: #00693E !important;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 2px;
+  }
+  .menu:hover{
+    color: #00693E !important;
+    /* background-color: #00693E; */
+    opacity: 0.6;
+  }
 .logoutBtn{
   color: #fff !important;
   background-color: transparent !important;
   /* border: none ; */
   box-shadow: none;
+  font-family: 'Orbitron', sans-serif;
+  font-weight:400 ;
+  font-size: 13px;
+  
 }
   .appName{
   font-family: 'Tilt Prism', cursive;
@@ -102,8 +160,10 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Tilt Prism', cursive;
-    font-weight:700 ;
+    font-family: 'Orbitron', sans-serif;
+    font-weight:bolder ;
+    font-size: 14px;
+    letter-spacing: 4px;
   }
 .v-tab{
   width: 100%;

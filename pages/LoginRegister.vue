@@ -8,10 +8,10 @@
         <v-form v-if="!registerActive">
           <h2 style="margin-bottom: 30px;">Sign In</h2>
           <v-text-field 
-            v-model="login.email" 
+            v-model="login.uname" 
             class="text-field" 
-            label="Email" 
-            type="email" />
+            label="User Name" 
+            type="text" />
           <v-text-field 
             v-model="login.password" 
             label="Password" 
@@ -34,10 +34,10 @@
         <v-form v-else>
           <h2 style="margin-bottom: 30px;">Sign Up</h2>
           <v-text-field 
-            v-model="reg.email" 
+            v-model="reg.uname" 
             class="text-field" 
-            label="Email" 
-            type="email" />
+            label="User Name" 
+            type="text" />
           <v-text-field 
             v-model="reg.password" 
             label="Password" 
@@ -67,11 +67,11 @@
     data() {
       return {
         login: {
-          email: '',
+          uname: '',
           password: ''
         },
         reg: {
-          email: '',
+          uname: '',
           password: '',
           cnfpassword: '',
         },
@@ -82,17 +82,17 @@
     methods: {
       onSubmit(e) {
         e.preventDefault()
-        localStorage.setItem('email', this.login.email)
+        localStorage.setItem('uname', this.login.uname)
         localStorage.setItem('password', this.login.password)
         this.$router.push('/')
         // this.$toaster('signIN','success')
       },
       onRegister(e){
+        e.preventDefault()
         if(this.reg.password !=this.reg.cnfpassword){
           return this.$toast.error('Incorrect Password!!');
         }
-        e.preventDefault()
-        localStorage.setItem('email', this.reg.email)
+        localStorage.setItem('uname', this.reg.uname)
         localStorage.setItem('password', this.reg.password)
         this.$router.push('/')
         
@@ -103,6 +103,9 @@
   </script>
   
   <style scoped>
+  .mt-4{
+    margin-top: 13px;
+  }
   span {
     cursor: pointer;
     text-decoration: underline;
@@ -116,6 +119,11 @@
     color:#343434 !important;
     border: 1px solid #343434;
     background-color: white;
+  }
+  .logBtn:hover{
+    color:#fff !important;
+    /* border: 1px solid #343434; */
+    background-color: #343434;
   }
   .loginForm {
     min-height: 100vh;
