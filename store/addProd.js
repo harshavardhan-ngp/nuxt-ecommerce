@@ -11,7 +11,6 @@ const state=()=>({
         quantity:1,
         price:'12000',
         imgName:'',
-        genRandom:0
 
     },
     {
@@ -22,58 +21,26 @@ const state=()=>({
     ptype:'Laptops',
     quantity:3,
     price:'72000',
-    genRandom:1
     },
     {
         imgName:'',
         id:3,
         img:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-    pname:'Dell',
-    ptype:'Laptops',
-    quantity:3,
-    price:'72000',
-    genRandom:1
+    pname:'Shoe',
+    ptype:'Fashion',
+    quantity:5,
+    price:'12000',
     },
     {
         imgName:'',
         id:4,
         img:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-    pname:'Dell',
+    pname:'Headphones',
     ptype:'Laptops',
-    quantity:3,
-    price:'72000',
-    genRandom:1
+    quantity:11,
+    price:'699',
     },
-    {
-        imgName:'',
-        id:5,
-        img:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-    pname:'Dell',
-    ptype:'Laptops',
-    quantity:3,
-    price:'72000',
-    genRandom:1
-    },
-    {
-        imgName:'',
-        id:6,
-        img:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-    pname:'Dell',
-    ptype:'Laptops',
-    quantity:3,
-    price:'72000',
-    genRandom:1
-    },
-    {
-        imgName:'',
-        id:7,
-        img:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-    pname:'Dell',
-    ptype:'Laptops',
-    quantity:3,
-    price:'72000',
-    genRandom:1
-    },
+    
     ]
 });
 
@@ -96,7 +63,6 @@ const getters={
 const mutations={
     addList(state, payload){
         payload['id']=state.id++
-        payload['genRandom']=Math.floor(Math.random()*5)
         state.prodList.push(payload)
         // console.log('prod:',state.prodList);
     },
@@ -118,7 +84,6 @@ const mutations={
         data.price = payload.price
         data.quantity = payload.quantity
         data.imgName = payload.imgName
-        data.genRandom = payload.genRandom
         console.log('listUpdate:', data, payload);
         // data=payload
     },

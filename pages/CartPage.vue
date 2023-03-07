@@ -65,6 +65,11 @@
         </tbody>
       </template>
     </v-simple-table>
+    <div 
+      v-if="getList.length<=0" 
+      style="display: flex;justify-content: center;font-family: Source Sans Pro, sans-serif">
+      No Items in Cart
+    </div>
     
     <!-- </v-card> -->
   </v-container>

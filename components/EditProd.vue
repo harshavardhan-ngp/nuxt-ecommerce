@@ -174,7 +174,6 @@ export default {
       this.data['price']=this.editProd[0].price
       this.data['quantity']=this.editProd[0].quantity
       this.data['imgName']=this.editProd[0].imgName
-      this.data['genRandom']=this.editProd[0].genRandom
         // this.data=this.editProd
             console.log('data:',this.data);
 
