@@ -59,10 +59,10 @@ const mutations={
             payload.quantity+=1
         }
     },
-    delFromCart(state){
+    delFromCart(state,payload){
         // console.log(state.cartList);
         state.cartList=state.cartList.filter(ele=>(
-            ele.total>0
+            ele.id!=payload
         ))
     },
 };
@@ -77,8 +77,8 @@ const actions={
     delQuan({commit},payload){
         commit('decQuantity',payload)
     },
-    removeFromCart({commit}){
-        commit('delFromCart')
+    removeFromCart({commit}, payload){
+        commit('delFromCart', payload)
     }
 };
 

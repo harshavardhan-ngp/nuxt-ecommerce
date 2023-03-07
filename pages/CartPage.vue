@@ -48,7 +48,7 @@
                 <td v-else>
                   <v-icon 
                     class="remove" 
-                    @click="remove"
+                    @click="remove(items.id)"
                   >mdi-delete-circle</v-icon>
                 </td>
               </tr>
@@ -91,8 +91,8 @@ export default{
           const data = this.prodList.find(ele=> ele.id==ind)
             this.delQuan(data)
         },
-        remove(){
-            this.removeFromCart()
+        remove(ind){
+            this.removeFromCart(ind)
         }
     }
 }
