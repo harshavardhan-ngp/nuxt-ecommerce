@@ -208,7 +208,7 @@ export default {
   border-radius: 10px;
 }
 .v-dialog__content--active {
-  height: 70%;
+  height: 100vh;
     backdrop-filter: blur(3px);
 }
 .delUpt{

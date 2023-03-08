@@ -172,7 +172,7 @@ export default {
     display: unset; 
 }
 .v-dialog__content--active {
-  height: 70%;
+  height: 100vh;
     backdrop-filter: blur(3px);
 }
 .showAll, .addBtn{

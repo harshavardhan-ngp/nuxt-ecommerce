@@ -22,6 +22,7 @@
               <EditProd :prod-id="items.id"/>
               <v-img 
                 :src="items.img"
+                cover
               />
             </div>
             <v-card-title style="justify-content: space-between; font-family: 'Merienda', cursive;text-transform: capitalize;">
