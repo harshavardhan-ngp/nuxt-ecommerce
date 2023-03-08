@@ -81,18 +81,21 @@
     },
     layout: 'login',
     computed:{
-      ...mapGetters('login',['showCredential']),
+      ...mapGetters('login',['showCredential', 'hasDuplicate']),
+
     },
     methods: {
       ...mapActions('login',['register']),
       onSubmit(e) {
         e.preventDefault()
-        if(this.showCredential.uname=== this.login.uname && this.showCredential.password=== this.login.password)
+        const res=this.showCredential.find(ele=>(ele.uname==this.login.uname))
+        console.log(this.showCredential); 
+        if(res && res.password=== this.login.password)
         {
-          console.log(this.showCredential,':',this.login);
           localStorage.setItem('uname', this.login.uname)
           localStorage.setItem('password', this.login.password)
           this.$router.push('/')
+          this.login={}
         }
         else{
         this.$toast.error('Invalid Credentials!!');
@@ -102,11 +105,16 @@
       onRegister(e){
         e.preventDefault()
         if(this.reg.password !=this.cnfpassword){
-          return this.$toast.error('Invalid Credentials!!');
+          return this.$toast.error('Incorrect Password!!');
         }
         this.register(this.reg)
+        if(this.hasDuplicate){
+        return this.$toast.error('User Exists');     
+      }
         // this.$router.push('/login')
         this.registerActive=!this.registerActive
+        this.reg={}
+        this.cnfpassword=''
         // localStorage.setItem('uname', this.reg.uname)
         // localStorage.setItem('password', this.reg.password)
         

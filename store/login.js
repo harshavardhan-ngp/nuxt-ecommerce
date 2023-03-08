@@ -1,11 +1,13 @@
 const state=()=>({
-    credential:{
-    uname:'',
-    password:''
-    }
+    credential:[],
+    duplicate:false,
+
 })
 
 const getters={
+    hasDuplicate(state){
+        return state.duplicate
+    },
     showCredential(state){
         return state.credential
     }
@@ -14,7 +16,13 @@ const getters={
 const mutations={
     addUser(state, payload){
         console.log(payload);
-     state.credential=payload   
+        const data=state.credential.find(ele=>(ele.uname==payload.uname))
+        if(data && data.uname == payload.uname && data.password==payload.password){
+            state.duplicate=true
+            return false
+        }
+        state.credential.push(payload)   
+        state.duplicate=false
     }
 }
 
