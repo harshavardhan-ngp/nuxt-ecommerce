@@ -70,8 +70,12 @@ export default{
       ...mapActions('cart', ['appendCart']),
       ...mapActions('addProd', ['delProd']),
       addToCart(list){
+        if(list.quantity>0){
         this.appendCart(list)   
-        this.$toast.warning('Added to the Cart');     
+        this.$toast.warning('Added to the Cart');
+      }
+      else
+      return this.$toast.error('No Stocks Left !!');
       },
       delItem(id){
         this.delProd(id)
