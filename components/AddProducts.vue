@@ -106,23 +106,27 @@ export default {
       ],
   }),
   computed:{
-    ...mapGetters('addProd',['showType']),
+    ...mapGetters('addProd',['showType', 'hasDuplicate']),
     isType(){
       return this.showType
 
     }
   },
   methods: {
-    ...mapActions('addProd',['appendList', 'setType']),
-    handleSubmit(e) {
+    ...mapActions('addProd',['appendList', 'setType',]),
+    async handleSubmit(e) {
       e.preventDefault()
       if(this.data.img && this.data.pname && this.data.ptype && this.data.quantity && this.data.price){
         // console.log(this.data);
         this.appendList(this.data)
+        if(this.hasDuplicate){
+        return this.$toast.error('Duplicates are not allowed');     
+        }
         this.dialog=false
         this.data={}
         this.image=[]
         this.$refs.form.resetValidation()
+        this.$toast.warning('Added Successfully');     
       }
     },
     imgUpload(e) {
