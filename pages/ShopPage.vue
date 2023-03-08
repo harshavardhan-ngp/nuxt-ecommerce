@@ -14,7 +14,7 @@
           xs="10"
         >
           <v-card 
-            style="background-color: linen;"
+            style="background-color: rgb(175, 225, 175, 0.3);"
             width="244"
           >
             <!-- class="mx-auto card__face card__face--front"  -->
@@ -61,7 +61,7 @@ export default{
     };
   },
     computed:{
-      ...mapGetters('addProd',['showList']),
+      ...mapGetters('addProd',['showList',]),
         disp(){
             return this.showList
         }

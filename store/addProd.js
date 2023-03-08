@@ -1,12 +1,13 @@
 const state=()=>({
-    id:3,
+    id:5,
+    duplicate:false,
     filterType:'',
     editForm:[],
     prodList:[
         {
             id:1,
-            img:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-        pname:'MI',
+            img:require("@/assets/iphn.jpeg"),
+        pname:'iphone',
         ptype:'Mobile Phones',
         quantity:1,
         price:'12000',
@@ -16,7 +17,7 @@ const state=()=>({
     {
         imgName:'',
         id:2,
-        img:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+        img:require("@/assets/dell.jpg"),
     pname:'Dell',
     ptype:'Laptops',
     quantity:3,
@@ -25,8 +26,8 @@ const state=()=>({
     {
         imgName:'',
         id:3,
-        img:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-    pname:'Shoe',
+        img:require("@/assets/shirts.jpeg"),
+    pname:'shirts',
     ptype:'Fashion',
     quantity:5,
     price:'12000',
@@ -34,9 +35,9 @@ const state=()=>({
     {
         imgName:'',
         id:4,
-        img:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-    pname:'Headphones',
-    ptype:'Laptops',
+        img:require("@/assets/earbuds.jpeg"),
+    pname:'ear buds',
+    ptype:'Accessories',
     quantity:11,
     price:'699',
     },
@@ -45,6 +46,9 @@ const state=()=>({
 });
 
 const getters={
+    hasDuplicate(state){
+        return state.duplicate
+    },
     showList(state){
         if(state.filterType){
             return state.prodList.filter(ele=>ele.ptype==state.filterType)
@@ -61,9 +65,17 @@ const getters={
 };
 
 const mutations={
+    
     addList(state, payload){
         payload['id']=state.id++
+        const data=state.prodList.find(ele=>(ele.pname==payload.pname))
+        if(data && data.pname == payload.pname && data.ptype==payload.ptype){
+            state.duplicate=true
+            return false
+        }
+        state.duplicate=false
         state.prodList.push(payload)
+
         // console.log('prod:',state.prodList);
     },
     delFromList(state, payload){
