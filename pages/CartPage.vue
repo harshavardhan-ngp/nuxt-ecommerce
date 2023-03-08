@@ -106,10 +106,12 @@ export default{
         },
         decrease(ind){
           const data = this.prodList.find(ele=> ele.id==ind)
-            this.delQuan(data)
+          this.delQuan(data)
         },
         remove(ind){
-            this.removeFromCart(ind)
+          this.removeFromCart(ind)
+          return this.$toast.error('Removed from cart !!');
+
         }
     }
 }
