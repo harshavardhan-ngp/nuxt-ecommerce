@@ -143,15 +143,17 @@ export default {
     handleSubmit(e) {
       e.preventDefault()
       console.log('submit:',this.data);
-      if(this.data.img && this.data.pname && this.data.ptype && this.data.quantity && this.data.price){
+      if(this.data.img && this.data.pname && this.data.ptype && this.data.quantity>0 && this.data.price){
         // console.log(this.data);
         this.updtList(this.data)
         this.dialog=false
         this.data={}
         this.image=[]
         this.$refs.form.resetValidation()
-        this.$toast.warning('Item Updated');     
-
+        this.$toast.warning('Item Updated');   
+      }
+      else if(this.data.quantity<=0){
+        return this.$toast.error('Quantity should be 1 or greater');     
       }
       // this.appendList(this.data)
       // this.image=[]

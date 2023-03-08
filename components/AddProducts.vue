@@ -48,6 +48,7 @@
             <v-text-field 
               v-model="data.quantity" 
               :rules="[v => !!v || 'Quantity is required']"
+              min="0"
               label="Quantity" 
               type="number" 
               required />
@@ -116,17 +117,20 @@ export default {
     ...mapActions('addProd',['appendList', 'setType',]),
     async handleSubmit(e) {
       e.preventDefault()
-      if(this.data.img && this.data.pname && this.data.ptype && this.data.quantity && this.data.price){
+      if(this.data.img && this.data.pname && this.data.ptype && this.data.quantity>0 && this.data.price){
         // console.log(this.data);
         this.appendList(this.data)
         if(this.hasDuplicate){
         return this.$toast.error('Duplicates are not allowed');     
-        }
-        this.dialog=false
-        this.data={}
-        this.image=[]
-        this.$refs.form.resetValidation()
-        this.$toast.warning('Added Successfully');     
+      }
+      this.dialog=false
+      this.data={}
+      this.image=[]
+      this.$refs.form.resetValidation()
+      this.$toast.warning('Added Successfully');     
+    }
+    else if(this.data.quantity<=0){
+        return this.$toast.error('Quantity should be 1 or greater');     
       }
     },
     imgUpload(e) {
