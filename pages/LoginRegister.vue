@@ -95,14 +95,14 @@
           this.$router.push('/')
         }
         else{
-        this.$toast.error('Incorrect Credentials!!');
+        this.$toast.error('Invalid Credentials!!');
       }
         // this.$toaster('signIN','success')
       },
       onRegister(e){
         e.preventDefault()
         if(this.reg.password !=this.cnfpassword){
-          return this.$toast.error('Incorrect Credentials!!');
+          return this.$toast.error('Invalid Credentials!!');
         }
         this.register(this.reg)
         // this.$router.push('/login')
