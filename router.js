@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './pages/LoginRegister'
+import Dashboard from './pages/Dashboard'
 import Home from './pages/HomePage'
 import Shop from './pages/ShopPage'
 import Cart from './pages/CartPage'
@@ -18,6 +19,10 @@ export function createRouter() {
       },
       {
         path: '/',
+        component: Dashboard
+      },
+      {
+        path: '/home',
         component: Home
       },
       {

@@ -5,17 +5,6 @@
     >
       <v-toolbar-title class="appName">E-Commerce App</v-toolbar-title>
       <v-spacer/>
-      <!-- <v-btn
-        class="ma-2 logoutBtn"
-        @click="logout"
-      >
-        LogOut
-        <v-icon
-          right
-        >
-          mdi-exit-to-app
-        </v-icon>
-      </v-btn> -->
       <v-menu
         bottom
         left
@@ -67,7 +56,14 @@
           <v-tabs-slider color="yellow"/>
           <v-tab>
             <NuxtLink 
-              to="/"
+              to="/" 
+              class="navtabs">
+              Dashboard
+            </NuxtLink>
+          </v-tab>
+          <v-tab>
+            <NuxtLink 
+              to="/home"
               class="navtabs">
               Home
             </NuxtLink>
