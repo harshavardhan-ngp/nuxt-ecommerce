@@ -22,7 +22,9 @@
         <v-col
           v-for="card in cards"
           :key="card.title"
-          :cols="card.flex"
+          lg="3"
+          md="4"
+          sm="6"
           class="homeCard"
           @click="getType(card.title)"
         >
