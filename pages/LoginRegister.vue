@@ -44,7 +44,7 @@
             type="password" />
 
           <v-text-field 
-            v-model="reg.cnfpassword" 
+            v-model="cnfpassword" 
             label="Confirm Password" 
             type="password" />
           <v-btn 
@@ -53,8 +53,8 @@
             @click="onRegister">
             Register
           </v-btn>
-          <p class="mt-4">Don't have an account? <span
-            @click="registerActive = !registerActive, isSubmitted = false">Sign up here</span>
+          <p class="mt-4">Already have an account? <span
+            @click="registerActive = !registerActive, isSubmitted = false">Sign in</span>
           </p>
         </v-form>
       </v-sheet>
@@ -63,6 +63,7 @@
 </template>
   
   <script>
+  import{mapGetters, mapActions} from 'vuex'
   export default {
     data() {
       return {
@@ -73,28 +74,41 @@
         reg: {
           uname: '',
           password: '',
-          cnfpassword: '',
         },
+        cnfpassword: '',
         registerActive: false
       }
     },
     layout: 'login',
+    computed:{
+      ...mapGetters('login',['showCredential']),
+    },
     methods: {
+      ...mapActions('login',['register']),
       onSubmit(e) {
         e.preventDefault()
-        localStorage.setItem('uname', this.login.uname)
-        localStorage.setItem('password', this.login.password)
-        this.$router.push('/')
+        if(this.showCredential.uname=== this.login.uname && this.showCredential.password=== this.login.password)
+        {
+          console.log(this.showCredential,':',this.login);
+          localStorage.setItem('uname', this.login.uname)
+          localStorage.setItem('password', this.login.password)
+          this.$router.push('/')
+        }
+        else{
+        this.$toast.error('Incorrect Credentials!!');
+      }
         // this.$toaster('signIN','success')
       },
       onRegister(e){
         e.preventDefault()
-        if(this.reg.password !=this.reg.cnfpassword){
-          return this.$toast.error('Incorrect Password!!');
+        if(this.reg.password !=this.cnfpassword){
+          return this.$toast.error('Incorrect Credentials!!');
         }
-        localStorage.setItem('uname', this.reg.uname)
-        localStorage.setItem('password', this.reg.password)
-        this.$router.push('/')
+        this.register(this.reg)
+        // this.$router.push('/login')
+        this.registerActive=!this.registerActive
+        // localStorage.setItem('uname', this.reg.uname)
+        // localStorage.setItem('password', this.reg.password)
         
       }
     }

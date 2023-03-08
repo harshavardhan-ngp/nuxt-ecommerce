@@ -105,7 +105,7 @@ export default {
   },
   methods:{
     logout(){
-      localStorage.removeItem('email')
+      localStorage.removeItem('uname')
       localStorage.removeItem('password')
       this.$router.push('/login')
     }
