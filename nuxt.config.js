@@ -56,7 +56,7 @@ module.exports = {
     '@nuxtjs/router',
     'nuxt-material-design-icons-iconfont',
     "vue-toastification/nuxt",
-
+    "@nuxtjs/vuetify"
   ],
 
   /*

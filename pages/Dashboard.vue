@@ -86,8 +86,16 @@
           </div>
         </v-card>
       </v-col>
-      <v-col>
+      <v-col 
+        lg="8" 
+        md="7" 
+        sm="12">
         <Chart />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <Stat />
       </v-col>
     </v-row>
   </v-container>

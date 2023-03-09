@@ -51,9 +51,9 @@
       <template v-slot:extension>
         <v-tabs
           align-with-title
-          background-color="#00693E"
+          background-color="#051422"
         >
-          <v-tabs-slider color="yellow"/>
+          <v-tabs-slider/>
           <v-tab>
             <NuxtLink 
               to="/" 
@@ -125,13 +125,13 @@ export default {
   }
   .menu{
     cursor: pointer;
-    color: #00693E !important;
+    color: #051422 !important;
     font-family: 'Orbitron', sans-serif;
     letter-spacing: 2px;
   }
   .menu:hover{
-    color: #00693E !important;
-    /* background-color: #00693E; */
+    color: #051422 !important;
+    /* background-color: #00693E; olgGreen*/
     opacity: 0.6;
   }
 .logoutBtn{
@@ -154,7 +154,7 @@ export default {
   color: #fff !important;
 }
 .v-toolbar,.v-sheet{
-  background-color: #00693E !important;
+  background-color: #051422 !important;
   color: #fff !important;
 }
 .navtabs{
@@ -200,7 +200,7 @@ background-color:white;
   line-height: 55px;
   color: white;
   text-align: center;
-  background-color: #00693E;
+  background-color: #051422;
 
 }
 .header a{

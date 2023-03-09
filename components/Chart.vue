@@ -1,21 +1,22 @@
 <template>
-    
   <v-card
-    class="chartCard"
-  >
+    class="chartCard" >
     <v-toolbar 
       color="#D4F1F4"
       dense 
       elevation="0" >
       <v-tabs
         v-model="tab"
-        align-with-title
-      >
+        align-with-title >
         <v-tabs-slider 
           class="tabSlider" />
-
-        <v-tab
+        <v-tab 
+          v-for="item in tabItems" 
+          :key="item.tab" 
           class="tabs">
+          {{ item.tab }}
+        </v-tab>
+        <!-- <v-tab>
           Activity
         </v-tab>
         <v-tab
@@ -25,24 +26,21 @@
         <v-tab
           class="tabs">
           Sales
-        </v-tab>
+        </v-tab> -->
       </v-tabs>
-      
+     
       <v-spacer/>
 
       <v-menu
-        
-        bottom
-      >
+        bottom>
         <template v-slot:activator="{ on, attrs }">
           <v-btn
             v-bind="attrs"
             class="dropdown"
             text
-            v-on="on"
-          >
+            v-on="on" >
             Week
-            <v-icon>
+            <v-icon style="margin-left: 10px;">
               mdi-chevron-down
             </v-icon>
           </v-btn>
@@ -56,35 +54,33 @@
       
     </v-toolbar>
   
-    <Bar
-      id="my-chart-id"
-      :options="chartOptions"
-      :data="chartData"
-    />
-  
+    <v-tabs-items v-model="tab">
+      <v-tab-item 
+        v-for="item in tabItems" 
+        :key="item.tab" 
+        class="compo">
+        <component 
+          :is="item.content"/>
+      </v-tab-item>
+    </v-tabs-items>
+
   </v-card>
 
 </template>
 
 <script>
-import { Bar } from 'vue-chartjs'
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default{
+
     data(){
         return {
             tab: null,
-            items: [
-          'Activity', 'Clicks', 'Sales',
-        ],
-        chartData: {
-        labels: [ 'January', 'February', 'March' ],
-        datasets: [ { data: [40, 20, 12] } ]
-      },
-      chartOptions: {
-        responsive: true
-      }
+            tabItems: [
+              { tab: 'Activity', content: 'Graph' },
+              { tab: 'Clicks', content: 'Form' },
+              { tab: 'Sales', content: 'Table' }
+            ],
+           
     }
     },
 }
@@ -95,18 +91,29 @@ export default{
     box-shadow: none !important;
 }
 .tabSlider{
+    color: #DC4731;
+    border-radius: 35px !important;
     position: absolute;
     left: 15px;
     width: 24px !important;
+}
+.v-tabs-slider-wrapper{
+  height: 3px !important;
 }
 .tabs{
     padding: 0px 10px !important;
 }
 .dropdown{
+    border-radius: 13px !important;
     background-color: #051422 !important;
     color: #fff !important;
 }
+.compo{
+  background-color: #D4F1F4;
+}
 .chartCard{
+    border-radius: 19px !important;
+    min-height: 100%;
     background-color: #D4F1F4 !important;
 }
 </style>
