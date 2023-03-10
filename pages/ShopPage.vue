@@ -14,7 +14,7 @@
           xs="10"
         >
           <v-card 
-            style="background-color: rgb(175, 225, 175, 0.3);"
+            style="background-color: rgb(5,20,34, 0.2);"
             width="244"
           >
             <!-- class="mx-auto card__face card__face--front"  -->
@@ -97,25 +97,6 @@ background-image: linear-gradient(62deg, #8EC5FC 0%, #e4c3fc 50%, #ffffff 100%);
 
 
 }
-.antiquewhite{
-  background-color: #FFDEE9;
-background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
-
-}
-.cornsilk{
-  background-color: #FAACA8;
-background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);
-
-}
-.mistyrose{
-  background-color: #85FFBD;
-background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
-
-}
-.lightsteelblue{
-  background-image: linear-gradient( 92.7deg,  rgba(245,212,212,1) 8.5%, rgba(252,251,224,1) 90.2% );
-}
-
 .v-image
 {
   margin: auto;

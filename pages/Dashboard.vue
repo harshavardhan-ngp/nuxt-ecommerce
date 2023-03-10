@@ -7,7 +7,6 @@
         sm="12">
         <v-card
           class="mx-auto my-12"
-          max-width="374"
         >
           <v-toolbar 
             color="#051422"
@@ -35,7 +34,9 @@
             </v-card-title>
           </v-card-text>
 
-          <div style="padding-bottom: 20px;">
+          <div 
+            class="tickResp" 
+            style="padding-bottom: 20px;">
             <v-card-actions style="padding-left: 0px;">
               <v-list-item class="grow">
                 <v-list-item-avatar>
@@ -90,7 +91,7 @@
         lg="8" 
         md="7" 
         sm="12">
-        <Chart />
+        <ChartCard />
       </v-col>
     </v-row>
     <v-row>
@@ -152,5 +153,23 @@
     border-radius: 19px !important;
     padding:10px 12px;
     background-color: #051422 !important;
+}
+
+/* Tab */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .tickResp{
+    display: flex;
+    flex-direction: column;
+    align-items: center
+  }
+}
+
+/* Mac Air */
+@media only screen and (min-width: 819px) and (max-width: 821px){
+  .tickResp{
+    display: flex;
+    flex-direction: column;
+    align-items: center
+  }
 }
 </style>

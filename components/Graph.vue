@@ -19,10 +19,21 @@ export default{
         },
     data(){
         return{
-            series: [{
-              name: "Desktops",
-              data: [10, 41, 35, 51, 49, 62, 69]
-          }],
+            series: [
+              {
+                name: "Desktops",
+                data: [10, 41, 35, 51, 75, 61, 65]
+              },
+              {
+                name: "Mobile Phones",
+                data: [20, 11, 31, 20, 49, 52, 70]
+              },
+              {
+                name: "Laptops",
+                data: [8, 34, 20, 48, 29, 42, 57]
+              },
+
+        ],
           chartOptions: {
             chart: {
               height: 350,
@@ -31,6 +42,7 @@ export default{
                 enabled: false
               }
             },
+            colors: ['#DC4731', '#BA8D80', '#051422'],
             dataLabels: {
               enabled: false
             },
@@ -49,7 +61,11 @@ export default{
             xaxis: {
               categories: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
             },
-            colors: ['#fff']
+            legend: {
+              tooltipHoverFormatter: function(val, opts) {
+                return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
+              }
+            },
           },
         }
     }

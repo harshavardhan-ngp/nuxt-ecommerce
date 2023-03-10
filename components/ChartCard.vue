@@ -40,7 +40,9 @@
             text
             v-on="on" >
             Week
-            <v-icon style="margin-left: 10px;">
+            <v-icon 
+              class="dropdwIcon" 
+              style="margin-left: 10px;">
               mdi-chevron-down
             </v-icon>
           </v-btn>
@@ -76,9 +78,9 @@ export default{
         return {
             tab: null,
             tabItems: [
-              { tab: 'Activity', content: 'Graph' },
-              { tab: 'Clicks', content: 'Form' },
-              { tab: 'Sales', content: 'Table' }
+              { tab: 'Graph', content: 'Graph' },
+              { tab: 'Form', content: 'ChartForm' },
+              { tab: 'Table', content: 'ChartTable' }
             ],
            
     }
@@ -94,7 +96,7 @@ export default{
     color: #DC4731;
     border-radius: 35px !important;
     position: absolute;
-    left: 15px;
+    left: 16px;
     width: 24px !important;
 }
 .v-tabs-slider-wrapper{
@@ -102,8 +104,13 @@ export default{
 }
 .tabs{
     padding: 0px 10px !important;
+    color: #051422;
+    font-family: 'Golos Text', sans-serif;
+    font-weight:bolder !important;
+    font-size: 16px !important;
 }
 .dropdown{
+    font-family: 'Golos Text', sans-serif;
     border-radius: 13px !important;
     background-color: #051422 !important;
     color: #fff !important;
@@ -112,8 +119,28 @@ export default{
   background-color: #D4F1F4;
 }
 .chartCard{
+    padding: 10px 12px;
     border-radius: 19px !important;
     min-height: 100%;
     background-color: #D4F1F4 !important;
 }
+
+@media only screen and (max-width: 600px) {
+  .dropdwIcon{
+    margin-left: 0px !important;
+  }
+  .dropdown{
+    padding: 0 10px !important;
+    font-size: 10px !important;
+  }
+  .tabs{
+    padding: 0px 7px !important;
+    font-size: 13px !important;
+}
+.tabSlider{
+    left: 19px;
+}
+
+}
+
 </style>

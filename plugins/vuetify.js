@@ -1,31 +1,23 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import colors from 'vuetify/es5/util/colors'
-import "vuetify/dist/vuetify.min.css";
-import "@mdi/font/css/materialdesignicons.css";
+import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuetify)
-export default (ctx) => {
-    const vuetify = new Vuetify({
-      // ssr: true,
-      icons: {
-        iconfont: 'fa' || 'md',
-      },
-      theme: {
+
+export default new Vuetify({
+    theme: {
+        light: true,
         themes: {
-          light: {
-            //dark: false,
-            colors: {
-              primary: colors.red.darken1, // #E53935
-              secondary: colors.red.lighten4, // #FFCDD2
-            },
-          },
-          dark: {
-            ...colors,
-          },
-        },
-      },
-    });
-    ctx.app.vuetify = vuetify;
-    ctx.$vuetify = vuetify.framework;
-  };
+            light: {
+                primary: colors.blue.darken2,
+                accent: colors.grey.darken3,
+                secondary: colors.amber.darken3,
+                info: colors.teal.lighten1,
+                warning: colors.amber.base,
+                error: colors.deepOrange.accent4,
+                success: colors.green.accent3
+            }
+        }
+    }
+})

@@ -14,7 +14,8 @@
         >
           Show All
         </v-btn>
-        <v-btn
+        <v-btn 
+          v-else
           v-bind="attrs"
           class="addBtn"
           v-on="on"
@@ -190,7 +191,7 @@ export default {
 	cursor: pointer;
 	display: block;
 	position: relative;
-	border: 2px solid #00693E;
+	border: 2px solid #051422 ;
 	transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
   
 }
@@ -199,7 +200,7 @@ export default {
   /* background-color: #00693E !important;
   color: white; */
   color: #fff !important;
-	background-color: #00693E !important;
+	background-color: #051422  !important;
 	text-shadow: ntwo;
 }
 .addBtn:hover::before {
@@ -217,7 +218,7 @@ export default {
 	z-index: -1;
 	content: '';
 	color: #000 !important;
-	background: #00693E;
+	background: #051422 ;
 	transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
 }
 
@@ -229,10 +230,11 @@ export default {
 .btnSub {
   border: 2px solid black;
   background-color: transparent !important;
+  color: #000 !important;
 }
 
 .btnSub:hover {
-  color: white;
+  color: white !important;
   background-color: black !important;
 }
 
